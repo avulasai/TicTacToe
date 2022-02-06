@@ -17,38 +17,42 @@
         <select id="boardsizevalue"> 
             <option value="3" class="three">3X3</option>
             <option value="4" class="four"> 4X4</option>
+            <option value="5" class="four"> 5X5</option>
           </select>
-          <button id="boardsize" class="boardsizebutton">
-            BoardSiZe
+          <button type="submit" id="boardsize" class="boardsizebutton">
+            BoardSiZe or Replay
+          </button>
+          <button type="submit" id="singleplayer" class="singleplayerbutton">
+            SinglePlayer
           </button>
         <table>
             <tr>
                 <td id="playercell">
                     <p>player1</p>
                     <input type="text" id="name1" name="Player1Name">
-                    <select> 
+                    <select id="player1color"> 
                         <option value="red" class="red">Red</option>
                         <option value="green" class="green"> Green</option>
                       </select>
-                      <button id="submit1" class="submitbutton1">
-                        Submit
+                      <button type="submit" id="submit1" class="submitbutton1">
+                        Submit Player1 Info
                       </button>
                 </td>
                 <td id="playercell">
                     <p>player2</p>
                     <input type="text" id="name2" name="Player1Name2">
-                    <select> 
+                    <select id="player2color"> 
                         <option value="red" class="red">Red</option>
                         <option value="green" class="green"> Green</option>
                       </select>
-                      <button id="submit2" class="submitbutton2">
-                        Submit
+                      <button type="submit" id="submit2" class="submitbutton2">
+                        Submit Player2 Info
                       </button>
                 </td>
             </tr>
             <tr>
-                <td></td>
-                <td></td>
+                <td id="player1message"></td>
+                <td id="player2message"></td>
             </tr>
         </table>
     </div>
