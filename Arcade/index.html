@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- loads our own CSS file -->
+    <link rel="stylesheet" href="style.css" />
+    <!-- <script type="text/javascript" src="/script.js"></script> -->
+</head>
+
+<body>
+    <div id="playersarea">
+        <p> Players </p>
+        <select id="boardsizevalue"> 
+            <option value="3" class="three">3X3</option>
+            <option value="4" class="four"> 4X4</option>
+          </select>
+          <button id="boardsize" class="boardsizebutton">
+            BoardSiZe
+          </button>
+        <table>
+            <tr>
+                <td id="playercell">
+                    <p>player1</p>
+                    <input type="text" id="name1" name="Player1Name">
+                    <select> 
+                        <option value="red" class="red">Red</option>
+                        <option value="green" class="green"> Green</option>
+                      </select>
+                      <button id="submit1" class="submitbutton1">
+                        Submit
+                      </button>
+                </td>
+                <td id="playercell">
+                    <p>player2</p>
+                    <input type="text" id="name2" name="Player1Name2">
+                    <select> 
+                        <option value="red" class="red">Red</option>
+                        <option value="green" class="green"> Green</option>
+                      </select>
+                      <button id="submit2" class="submitbutton2">
+                        Submit
+                      </button>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+    <div id="messagearea">
+        <p> Message Area</p>
+        <h1 id='finalwinner'></h1>
+    </div>
+    <!-- <div>
+        <p> Tic Tac Toe</p>
+        <table id="tictable">
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+
+        </table>
+    </div> -->
+
+    <div>
+        <p> Tic Tac Toe</p>
+        <table id="tictable2">
+        </table>
+    </div>
+</body>
+<!-- loads javascript  file -->
+<script type="text/javascript" src="app.js"></script>
+
+</html>
