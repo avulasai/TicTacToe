@@ -3,51 +3,50 @@
     font-family: 'Press Start 2P', cursive;
   }
   
-  /* html {
-    background-color: #222;
-    color: white;
-  } */
-  
   body {
-    /* display: flex;
+    display: flex;
     flex-direction: column;
-    align-items: center; */
-    background-color: blue;
+    align-items: center;
+    background-color: grey;
   } 
   
   
   /* your CSS below! */
   
-  td {
-    height: 50px;
-    width: 50px;
-    background-color: lightblue;
-    margin: 5px;
-    text-align: center;
+#playerstable {
+  height: 30px;
+    width: 6000px;
+}
+  #playercell  #player1message #player2message {
+    /* height: 30px;
+    width: 6000px; */
+    background-color: lightskyblue;
+    /* margin: 5px; */
+    text-align:justify;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
   }
 
-  .tictable {
+  /* .tictable {
   background-color: darkolivegreen;
   border: solid 20px #000;
   padding: 20px;
   width: 360px;
   display: flex;
   flex-wrap: wrap;
-         }
+         } */
 
-  .playersarea {
+  /* .playersarea {
     padding: 20px;
-  width: 360px;
-  height: 360px;
+  width: 500px;
+  height: 200px;
   display: flex;
   background-color: darkolivegreen;
 
-  }
+  } */
 
-  #playercell {
-    width: 100px;
-    height: 100px;
-  }
 
   .red {
     background-color: red;
@@ -60,4 +59,11 @@
     background-color: beige;
   }
 
+  td {
+    height: 100px;
+    width: 100px;
+    background-color: lightblue;
+    margin: 5px;
+    text-align: center;
+  }
   

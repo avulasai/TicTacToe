@@ -39,6 +39,7 @@ let player1color = document.getElementById('player1color').value;
 let player2color = document.getElementById('player2color').value;
 let evenoddcounter = 0;
 let singleplayeractive = 0;
+let gamewin = 0;
 
 const player1button = document.getElementById('submit1')
 const player2button = document.getElementById('submit2')
@@ -65,60 +66,63 @@ let player2name = document.getElementById('name2').value;
 
 function playerinfochecks() {
   let winnertext = document.getElementById('finalwinner')
-  if (player1color==player2color) {
+  if (player1color == player2color) {
     winnertext.innerHTML = "Please choose different colors before proceeding"
     return "error";
   }
-  else {winnertext.innerHTML = ""}
+  else { winnertext.innerHTML = "" }
   if (player1name == "") {
     winnertext.innerHTML = "Please choose a player1";
     return "error";
   }
-  else {winnertext.innerHTML = ""}
+  else { winnertext.innerHTML = "" }
   if (player2name == "") {
-    winnertext.innerHTML = winnertext.innerHTML  && " Please choose a player2";
+    winnertext.innerHTML = winnertext.innerHTML && " Please choose a player2";
     return "error";
   }
-  else {winnertext.innerHTML = ""}
+  else { winnertext.innerHTML = "" }
   if (player2name == "" || player1name == "") {
-    winnertext.innerHTML = winnertext.innerHTML  && " Please choose players";
+    winnertext.innerHTML = winnertext.innerHTML && " Please choose players";
     return "error";
   }
-  else {winnertext.innerHTML = ""}
+  else { winnertext.innerHTML = "" }
 
 }
 
 function updatePlayerInfo() {
-  
-   player1name = document.getElementById('name1').value;
-   player2name = document.getElementById('name2').value
+  makeTicTacToe()
+  player1name = document.getElementById('name1').value;
+  player2name = document.getElementById('name2').value
   player1color = document.getElementById('player1color').value
   player2color = document.getElementById('player2color').value
   const player1 = document.getElementById('player1message');
   player1.innerHTML = "welcome " + player1name + " You chose color :  " + player1color;
   const player2 = document.getElementById('player2message');
   player2.innerHTML = "welcome " + player2name + " You chose color :  " + player2color;
-  if (playerinfochecks() == "error"){return "error"}
-  
+  if (playerinfochecks() == "error") { return "error" }
+
 }
 
-function updateSinglePlayerInfo () {
+function updateSinglePlayerInfo() {
+  makeTicTacToe()
   singleplayeractive = 1;
   player1name = document.getElementById('name1').value;
   player2name = "computer"
   document.getElementById('name2').value = player2name;
- player1color = document.getElementById('player1color').value
- if (player1color == "red") {
-   player2color = "green" 
-   document.getElementById('player2color').value = player2color; }
- if (player1color == "green") {
-   player2color = "red"
-  document.getElementById('player2color').value = player2color; }
- const player1 = document.getElementById('player1message');
- player1.innerHTML = "welcome " + player1name + " You chose color :  " + player1color;
- const player2 = document.getElementById('player2message');
- player2.innerHTML = "Computer chose color :  " + player2color;
- if (playerinfochecks() == "error"){return "error"}
+  player1color = document.getElementById('player1color').value
+  if (player1color == "red") {
+    player2color = "green"
+    document.getElementById('player2color').value = player2color;
+  }
+  if (player1color == "green") {
+    player2color = "red"
+    document.getElementById('player2color').value = player2color;
+  }
+  const player1 = document.getElementById('player1message');
+  player1.innerHTML = "welcome " + player1name + " You chose color :  " + player1color;
+  const player2 = document.getElementById('player2message');
+  player2.innerHTML = "Computer chose color :  " + player2color;
+  if (playerinfochecks() == "error") { return "error" }
 }
 
 function colorize(event) {
@@ -126,48 +130,53 @@ function colorize(event) {
   let eventCell = target.tagName;
   evenoddcounter = evenoddcounter + 1;
   let finalwin;
-  if (playerinfochecks() == "error"){return "error"}
-  if (eventCell === "TD" && (evenoddcounter % 2 == 1)) {
-    target.className = player1color;
-    target.innerHTML = "X";
-    finalwin = checkWhowon(target.innerHTML);
+  if (playerinfochecks() == "error") { return "error" }
+  if (gamewin === 0) {
+    if (eventCell === "TD" && (evenoddcounter % 2 == 1)) {
+      target.className = player1color;
+      target.innerHTML = "X";
+      finalwin = checkWhowon(target.innerHTML);
+    }
+    if (eventCell === "TD" && (evenoddcounter % 2 == 0)) {
+      target.className = player2color;
+      target.innerHTML = "O";
+      finalwin = checkWhowon(target.innerHTML);
+    }
+    console.log(finalwin);
+    if (singleplayeractive === 1 && !finalwin) {
+      callcomputer()
+    }
   }
-  if (eventCell === "TD" && (evenoddcounter % 2 == 0)) {
-    target.className = player2color;
-    target.innerHTML = "O";
-    finalwin = checkWhowon(target.innerHTML);
+  else {
+    document.getElementById('finalwinner').innerHTML = "Game Over. Reset to Play Again"
   }
-  console.log (finalwin);
-  if (singleplayeractive ===1 && !finalwin) {
-    callcomputer()}
-
 }
 
 function callcomputer() {
   let tictactable2 = document.getElementById('tictable2');
-  let filled=0;
+  let filled = 0;
   for (let r = 0; r < boardsizenumber; r++) {
     for (let c = 0; c < boardsizenumber; c++) {
-      if (filled != 1 
-        && tictactable2.rows[r].cells[c].className == player1color 
-        && tictactable2.rows[r+1].cells[c].className == player1color
-        && ((r+2)<boardsizenumber)
-        && tictactable2.rows[r+2].cells[c].className != player2color) {
-        tictactable2.rows[r+2].cells[c].className = player2color;
-        tictactable2.rows[r+2].cells[c].innerHTML = "O";
+      if (filled != 1
+        && tictactable2.rows[r].cells[c].className == player1color
+        && tictactable2.rows[r + 1].cells[c].className == player1color
+        && ((r + 2) < boardsizenumber)
+        && tictactable2.rows[r + 2].cells[c].className != player2color) {
+        tictactable2.rows[r + 2].cells[c].className = player2color;
+        tictactable2.rows[r + 2].cells[c].innerHTML = "O";
         evenoddcounter = evenoddcounter + 1;
-        filled=1;
+        filled = 1;
         return "filled"
-      } 
-      if (filled != 1 
-        && tictactable2.rows[r].cells[c].className != player1color 
+      }
+      if (filled != 1
+        && tictactable2.rows[r].cells[c].className != player1color
         && tictactable2.rows[r].cells[c].className != player2color) {
         tictactable2.rows[r].cells[c].className = player2color;
         tictactable2.rows[r].cells[c].innerHTML = "O";
         evenoddcounter = evenoddcounter + 1;
-        filled=1;
+        filled = 1;
         return "filled"
-      } 
+      }
     }
 
   }
@@ -175,6 +184,7 @@ function callcomputer() {
 }
 
 function makeTicTacToe() {
+  gamewin = 0;
   evenoddcounter = 0;
   let winnertext = document.getElementById('finalwinner')
   winnertext.innerHTML = "";
@@ -198,11 +208,16 @@ function checkWhowon(oddoreven) {
   let winnertext = document.getElementById('finalwinner')
   let wincolor = 'beige';
   console.log(evenoddcounter + boardsizenumber);
-  if(evenoddcounter===(boardsizenumber*boardsizenumber)) {winnertext.innerHTML = "The Game is a Draw. Play Again"; return true;}
+  if (evenoddcounter === (boardsizenumber * boardsizenumber)) {
+    winnertext.innerHTML = "The Game is a Draw. Play Again";
+    gamewin = 1;
+    return true;
+  }
   if (oddoreven === 'X') {
     wincolor = player1color;
     if (rowwinner(wincolor) === "winner" || colwinner(wincolor) === "winner" || diawinner(wincolor) === "winner") {
       winnertext.innerHTML = "winner is " + player1name;
+      gamewin = 1;
       return true
     }
   }
@@ -210,10 +225,11 @@ function checkWhowon(oddoreven) {
     wincolor = player2color;
     if (rowwinner(wincolor) === "winner" || colwinner(wincolor) === "winner" || diawinner(wincolor) === "winner") {
       winnertext.innerHTML = "winner is " + player2name;
+      gamewin = 1;
       return true
     }
   }
-return false;
+  return false;
 }
 
 function rowwinner(wincolor) {
@@ -293,26 +309,26 @@ function diawinner(wincolor) {
 
 
 
-  /* some player info checks 
-  let winnertext = document.getElementById('finalwinner')
-  if (player1color==player2color) {
-    winnertext.innerHTML = "Please choose different colors before proceeding"
-    return "Please choose different colors before proceeding";
-  }
-  else {winnertext.innerHTML = ""}
-  if (player1name == "") {
-    winnertext.innerHTML = "Please choose a player1";
-    return "Please enter players before proceeding";
-  }
-  else {winnertext.innerHTML = ""}
-  if (player2name == "") {
-    winnertext.innerHTML = " Please choose a player2";
-    return "Please enter players before proceeding";
-  }
-  else {winnertext.innerHTML = ""}
-  if (player2name == "" || player1name == "") {
-    winnertext.innerHTML = " Please choose players";
-    return "Please enter players before proceeding";
-  }
-  else {winnertext.innerHTML = ""}
-   finish player info checks*/
+/* some player info checks
+let winnertext = document.getElementById('finalwinner')
+if (player1color==player2color) {
+  winnertext.innerHTML = "Please choose different colors before proceeding"
+  return "Please choose different colors before proceeding";
+}
+else {winnertext.innerHTML = ""}
+if (player1name == "") {
+  winnertext.innerHTML = "Please choose a player1";
+  return "Please enter players before proceeding";
+}
+else {winnertext.innerHTML = ""}
+if (player2name == "") {
+  winnertext.innerHTML = " Please choose a player2";
+  return "Please enter players before proceeding";
+}
+else {winnertext.innerHTML = ""}
+if (player2name == "" || player1name == "") {
+  winnertext.innerHTML = " Please choose players";
+  return "Please enter players before proceeding";
+}
+else {winnertext.innerHTML = ""}
+ finish player info checks*/
